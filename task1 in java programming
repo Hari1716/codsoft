@@ -1,0 +1,59 @@
+import java.util.Random;
+import java.util.Scanner;
+public class task1
+{
+    static void repeat(int rand_int,int rand_in)
+    {
+        if(rand_int > rand_in){
+               if((rand_int - rand_in) <= 10 ){
+                   System.out.println("You're Close");
+               }
+               else {
+                //   System.out.println("The Random Integer: " + rand_int);
+                   System.out.println("You're Too Low...");
+               }
+           }
+           else
+           {
+               if((rand_in - rand_int) <= 10 ){
+                   System.out.println("You're Close");
+               }
+               else {
+               //    System.out.println("The Random Integer: " + rand_int);
+                   System.out.println("You're Too High...");
+               }
+           }
+         
+       }
+   
+    public static void main(String[] args)
+    {
+       Random harish = new Random();
+       Scanner read = new Scanner(System.in);
+       int rand_int = harish.nextInt(101);
+       int count =0;
+       //System.out.println("Your Score is " + count);
+       for(int j=0;;j++){
+                 System.out.println("1 Start\n2 Exit");
+       int user = read.nextInt();
+       if(user == 2){
+           System.out.println("Thanks for playing!!");
+           break;
+       }else{
+       System.out.println("You are only given with 3 chances Best of Luck!!");
+      for(int i=0;i<3;i++)
+      {
+           System.out.print("Enter a Random number: ");
+           int rand_in = read.nextInt();
+           if(rand_int == rand_in){
+               System.out.println("U Nailed it!!!!");
+               count++;
+               break;
+           }
+           repeat(rand_int,rand_in);
+      }
+      System.out.println("Your Score is " + count);
+       }
+       }
+    }
+}
