@@ -1,11 +1,11 @@
 import java.util.Random;
 import java.util.Scanner;
-public class task1
+public class task1B
 {
     static void repeat(int rand_int,int rand_in)
     {
         if(rand_int > rand_in){
-               if((rand_int - rand_in) <= 10 ){
+               if((rand_int - rand_in) <= 5 ){
                    System.out.println("You're Close");
                }
                else {
@@ -15,7 +15,7 @@ public class task1
            }
            else
            {
-               if((rand_in - rand_int) <= 10 ){
+               if((rand_in - rand_int) <= 5 ){
                    System.out.println("You're Close");
                }
                else {
@@ -48,6 +48,7 @@ public class task1
            if(rand_int == rand_in){
                System.out.println("U Nailed it!!!!");
                count++;
+               rand_int = harish.nextInt(101);
                break;
            }
            repeat(rand_int,rand_in);
