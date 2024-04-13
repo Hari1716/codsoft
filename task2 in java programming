@@ -1,0 +1,40 @@
+import java.util.Scanner;
+class task2
+{
+    public static void main(String[] args)
+    {
+        Scanner read = new Scanner(System.in);
+        System.out.print("Enter the number of subjects: ");
+        int subjects = read.nextInt();
+        int[] arr = new int[subjects];
+        System.out.println("Enter the marks out of 100 for each subjects");
+        for(int i=0;i<subjects;i++)
+        {
+            System.out.print("Enter the marks for subject("+(i+1)+"): ");
+            arr[i] = read.nextInt();
+        }
+        int sum = 0;
+        for(int i=0;i<subjects;i++){
+            sum+=arr[i];
+        }
+        System.out.println("Total Marks of the subjects: " + sum);
+        double c = sum/subjects;
+        System.out.println("The average of your subjects is: " + c);
+        System.out.print("The Grade you've Achived: ");
+        if(c>=90){
+            System.out.print("O");
+        }else if(c >=80 && c<90){
+            System.out.print("A+");
+        }else if(c>=70 && c<80){
+            System.out.print("A");
+        }else if(c>=60 && c<70){
+            System.out.print("B+");
+        }else if(c>=50 && c<60){
+            System.out.print("B");
+        }else if(c>=40 && c<50){
+            System.out.print("C");
+        }else{
+            System.out.print("Failed");
+        }
+    }
+}
