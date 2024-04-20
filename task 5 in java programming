@@ -1,0 +1,148 @@
+import java.util.Scanner;
+
+class Student {
+    private String name;
+    private int rollNumber;
+    private String grade;
+
+    public Student(String name, int rollNumber, String grade) {
+        this.name = name;
+        this.rollNumber = rollNumber;
+        this.grade = grade;
+    }
+
+    public String getName() {
+        return name;
+    }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+    public int getRollNumber() {
+        return rollNumber;
+    }
+
+    public void setRollNumber(int rollNumber) {
+        this.rollNumber = rollNumber;
+    }
+
+    public String getGrade() {
+        return grade;
+    }
+
+    public void setGrade(String grade) {
+        this.grade = grade;
+    }
+}
+
+class StudentManagementSystem {
+    private Student[] students;
+    private int maxSize;
+    private int currentSize;
+
+    public StudentManagementSystem(int maxSize) {
+        this.maxSize = maxSize;
+        this.students = new Student[maxSize];
+        this.currentSize = 0;
+    }
+
+    public void addStudent(Student student) {
+        if (currentSize < maxSize) {
+            students[currentSize++] = student;
+            System.out.println("Student added successfully.");
+        } else {
+            System.out.println("Cannot add more students. Maximum size reached.");
+        }
+    }
+
+    public void removeStudent(int rollNumber) {
+        for (int i = 0; i < currentSize; i++) {
+            if (students[i].getRollNumber() == rollNumber) {
+                for (int j = i; j < currentSize - 1; j++) {
+                    students[j] = students[j + 1];
+                }
+                students[currentSize - 1] = null;
+                currentSize--;
+                System.out.println("Student removed successfully.");
+                return;
+            }
+        }
+        System.out.println("Student not found.");
+    }
+
+    public Student searchStudent(int rollNumber) {
+        for (int i = 0; i < currentSize; i++) {
+            if (students[i].getRollNumber() == rollNumber) {
+                return students[i];
+            }
+        }
+        return null;
+    }
+
+    public void displayAllStudents() {
+        System.out.println("List of Students:");
+        for (int i = 0; i < currentSize; i++) {
+            System.out.println("Name: " + students[i].getName() + ", Roll Number: " + students[i].getRollNumber() + ", Grade: " + students[i].getGrade());
+        }
+    }
+}
+
+class Main {
+    public static void main(String[] args) {
+        StudentManagementSystem sms = new StudentManagementSystem(100); // Maximum size of 100 students
+        Scanner scanner = new Scanner(System.in);
+
+        while (true) {
+            System.out.println("\nStudent Management System Menu:");
+            System.out.println("1. Add a new student");
+            System.out.println("2. Remove a student");
+            System.out.println("3. Search for a student");
+            System.out.println("4. Display all students");
+            System.out.println("5. Exit");
+            System.out.print("Enter your choice: ");
+            int choice = scanner.nextInt();
+            scanner.nextLine(); // Consume newline
+
+            switch (choice) {
+                case 1:
+                    System.out.print("Enter student name: ");
+                    String name = scanner.nextLine();
+                    System.out.print("Enter student roll number: ");
+                    int rollNumber = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    System.out.print("Enter student grade: ");
+                    String grade = scanner.nextLine();
+                    sms.addStudent(new Student(name, rollNumber, grade));
+                    break;
+                case 2:
+                    System.out.print("Enter roll number of student to remove: ");
+                    int rollToRemove = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    sms.removeStudent(rollToRemove);
+                    break;
+                case 3:
+                    System.out.print("Enter roll number of student to search: ");
+                    int rollToSearch = scanner.nextInt();
+                    scanner.nextLine(); // Consume newline
+                    Student searchedStudent = sms.searchStudent(rollToSearch);
+                    if (searchedStudent != null) {
+                        System.out.println("Student found:");
+                        System.out.println("Name: " + searchedStudent.getName() + ", Roll Number: " + searchedStudent.getRollNumber() + ", Grade: " + searchedStudent.getGrade());
+                    } else {
+                        System.out.println("Student not found.");
+                    }
+                    break;
+                case 4:
+                    sms.displayAllStudents();
+                    break;
+                case 5:
+                    System.out.println("Exiting program.");
+                    scanner.close();
+                    System.exit(0);
+                default:
+                    System.out.println("Invalid choice. Please enter a number between 1 and 5.");
+            }
+        }
+    }
+}
